@@ -1,6 +1,7 @@
 package com.theomen.videoclub.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -14,10 +15,19 @@ public class Movie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String titulo;
+
+    @Column(nullable = false)
     private Integer anio;
+
+    @Column(nullable = false)
     private Double rating;
+
+    @Column(length = 500)
     private String poster;
+
+    @Column(columnDefinition = "TEXT")
     private String sinopsis;
 
     public Movie() {
