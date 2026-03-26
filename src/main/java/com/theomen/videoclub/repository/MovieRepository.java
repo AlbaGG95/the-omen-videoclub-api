@@ -1,4 +1,7 @@
 package com.theomen.videoclub.repository;
 
-public class MovieRepository {
+import com.theomen.videoclub.model.Movie;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface MovieRepository extends JpaRepository<Movie, Long> {
 }
