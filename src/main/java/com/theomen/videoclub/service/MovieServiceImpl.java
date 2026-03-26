@@ -4,6 +4,8 @@ import com.theomen.videoclub.model.Movie;
 import com.theomen.videoclub.repository.MovieRepository;
 import java.util.List;
 import org.springframework.stereotype.Service;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 
 @Service
 public class MovieServiceImpl implements MovieService {
@@ -27,13 +29,13 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public Movie getMovieById(Long id) {
         return movieRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Movie not found with id: " + id));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Movie not found with id: " + id));
     }
 
     @Override
     public Movie updateMovie(Long id, Movie movie) {
         Movie existingMovie = movieRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Movie not found with id: " + id));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Movie not found with id: " + id));
 
         existingMovie.setTitulo(movie.getTitulo());
         existingMovie.setAnio(movie.getAnio());
@@ -47,7 +49,7 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public void deleteMovie(Long id) {
         Movie existingMovie = movieRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Movie not found with id: " + id));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Movie not found with id: " + id));
 
         movieRepository.delete(existingMovie);
     }

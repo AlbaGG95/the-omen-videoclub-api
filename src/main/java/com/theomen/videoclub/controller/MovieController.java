@@ -3,6 +3,7 @@ package com.theomen.videoclub.controller;
 import com.theomen.videoclub.model.Movie;
 import com.theomen.videoclub.service.MovieService;
 import java.util.List;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -43,8 +44,8 @@ public class MovieController {
     }
 
     @DeleteMapping("/{id}")
-    public String deleteMovie(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteMovie(@PathVariable Long id) {
         movieService.deleteMovie(id);
-        return "Movie deleted successfully";
+        return ResponseEntity.noContent().build();
     }
 }
